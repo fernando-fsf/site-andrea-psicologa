@@ -2,10 +2,10 @@ import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { 
-  ChevronLeft, 
-  Calendar, 
-  Clock, 
+import {
+  ChevronLeft,
+  Calendar,
+  Clock,
   Share2,
   Facebook,
   Twitter,
@@ -20,7 +20,7 @@ import blogRelationshipImage from '@/assets/blog-relationship-therapy.jpg';
 const BlogPost = () => {
   const { slug } = useParams();
 
-  // Mock blog posts data - in real app this would come from CMS or API
+  // Mock blog posts data
   const blogPosts = {
     'como-escolher-um-psicologo': {
       title: 'Como escolher um psicólogo em Nova Iguaçu',
@@ -141,7 +141,7 @@ const BlogPost = () => {
   };
 
   const currentPost = blogPosts[slug as keyof typeof blogPosts];
-  
+
   if (!currentPost) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -157,6 +157,53 @@ const BlogPost = () => {
       </div>
     );
   }
+
+  const getAbsoluteImageUrl = (imagePath: string) => {
+    const imageName = imagePath.split('/').pop()?.split('.')[0];
+    const imageMap: { [key: string]: any } = {
+      'blog-psychology-consultation': blogPsychologyImage,
+      'blog-workplace-anxiety': blogAnxietyImage,
+      'blog-relationship-therapy': blogRelationshipImage,
+    };
+    const imageUrl = imageMap[imageName as keyof typeof imageMap] || '';
+    return `https://andreamatiaspsi.com${imageUrl}`;
+  };
+
+  const formatDateForSchema = (dateString: string) => {
+    const months: { [key: string]: string } = {
+      'Janeiro': '01', 'Fevereiro': '02', 'Março': '03', 'Abril': '04', 
+      'Maio': '05', 'Junho': '06', 'Julho': '07', 'Agosto': '08', 
+      'Setembro': '09', 'Outubro': '10', 'Novembro': '11', 'Dezembro': '12'
+    };
+    const parts = dateString.replace(',', '').split(' ');
+    const day = parts[0].padStart(2, '0');
+    const month = months[parts[2]];
+    const year = parts[3];
+    return `${year}-${month}-${day}`;
+  };
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": currentPost.title,
+    "description": currentPost.excerpt,
+    "image": getAbsoluteImageUrl(currentPost.image),
+    "author": {
+      "@type": "Person",
+      "name": "Andréa Matias",
+      "url": "https://andreamatiaspsi.com/sobre"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Andréa Matias Psicologia",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://andreamatiaspsi.com/favicon.ico"
+      }
+    },
+    "datePublished": formatDateForSchema(currentPost.date),
+    "dateModified": formatDateForSchema(currentPost.date)
+  };
 
   const relatedPosts = [
     {
@@ -182,6 +229,9 @@ const BlogPost = () => {
         <meta property="og:description" content={currentPost.excerpt} />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={`https://andreamatiaspsi.com/blog/${slug}`} />
+        <script type="application/ld+json">
+            {JSON.stringify(articleSchema)}
+        </script>
       </Helmet>
 
       <article className="min-h-screen">
@@ -189,14 +239,14 @@ const BlogPost = () => {
         <section className="section-padding bg-primary/5">
           <nav className="container mx-auto container-padding" aria-label="Navegação do artigo">
             <div className="flex items-center justify-between mb-8">
-              <Link 
+              <Link
                 to="/blog"
                 className="inline-flex items-center text-success hover:text-success/80 font-medium"
               >
                 <ChevronLeft className="w-4 h-4 mr-2" />
                 Voltar ao Blog
               </Link>
-              <Link 
+              <Link
                 to="/"
                 className="inline-flex items-center text-muted-foreground hover:text-success font-medium"
               >
@@ -204,7 +254,7 @@ const BlogPost = () => {
                 Página Principal
               </Link>
             </div>
-            
+
             <div className="max-w-4xl mx-auto">
               {/* Article Header Image */}
               {currentPost.image && (
@@ -217,15 +267,15 @@ const BlogPost = () => {
                   />
                 </div>
               )}
-              
+
               <div className="flex items-center gap-2 text-sm text-success font-semibold mb-4">
                 <span className="bg-success/10 px-3 py-1 rounded-full">{currentPost.category}</span>
               </div>
-              
+
               <h1 className="text-hero mb-6">
                 {currentPost.title}
               </h1>
-              
+
               <div className="flex items-center gap-6 text-sm text-muted-foreground mb-8">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
@@ -236,7 +286,7 @@ const BlogPost = () => {
                   <span>{currentPost.readTime} de leitura</span>
                 </div>
               </div>
-              
+
               {/* Share Buttons */}
               <div className="flex items-center gap-4 mb-8">
                 <span className="text-sm font-medium">Compartilhar:</span>
@@ -263,7 +313,7 @@ const BlogPost = () => {
         <section className="section-padding">
           <div className="container mx-auto container-padding">
             <article className="max-w-4xl mx-auto">
-              <div 
+              <div
                 className="prose prose-lg max-w-none prose-headings:font-heading prose-h2:text-2xl prose-h2:font-bold prose-h2:mt-8 prose-h2:mb-4 prose-h3:text-xl prose-h3:font-semibold prose-h3:mt-6 prose-h3:mb-3 prose-p:mb-4 prose-p:leading-relaxed prose-ul:mb-4 prose-li:mb-2"
                 dangerouslySetInnerHTML={{ __html: currentPost.content }}
               />
@@ -281,7 +331,7 @@ const BlogPost = () => {
                     Precisa de ajuda profissional?
                   </h3>
                   <p className="text-body-large mb-6">
-                    Se você se identificou com este artigo e gostaria de conversar sobre suas questões pessoais, 
+                    Se você se identificou com este artigo e gostaria de conversar sobre suas questões pessoais,
                     estou aqui para ajudar. Agende uma consulta para começarmos sua jornada de bem-estar.
                   </p>
                   <Button className="btn-primary" asChild>
@@ -311,7 +361,7 @@ const BlogPost = () => {
                     <h3 className="text-card-title mb-4 group-hover:text-success transition-colors">
                       {post.title}
                     </h3>
-                    <Link 
+                    <Link
                       to={`/blog/${post.slug}`}
                       className="text-success hover:text-success/80 font-medium text-sm flex items-center group"
                     >
@@ -322,7 +372,7 @@ const BlogPost = () => {
                 </Card>
               ))}
             </div>
-            
+
             {/* Bottom Navigation */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12 pt-8 border-t">
               <Button variant="outline" asChild>
