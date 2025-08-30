@@ -9,64 +9,79 @@
 
 @layer base {
   :root {
-    /* Psychology Brand Colors - Warm, Professional & Calming */
-    --background: 46 33% 96%; /* Off-white with warmth */
-    --foreground: 240 6% 34%; /* Professional dark gray */
+    /* Modern Psychology Brand Colors - Vibrant, Professional & Sophisticated */
+    --background: 43 44% 97%; /* Warm off-white with personality */
+    --foreground: 240 15% 25%; /* Rich professional charcoal */
 
     --card: 0 0% 100%;
-    --card-foreground: 240 6% 34%;
+    --card-foreground: 240 15% 25%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 6% 34%;
+    --popover-foreground: 240 15% 25%;
 
-    /* Primary - Calming Rose for psychology branding */
-    --primary: 340 15% 75%; /* Rose #E0B1C9 equivalent */
-    --primary-foreground: 240 6% 34%;
+    /* Primary - Elegant Rose with depth */
+    --primary: 342 55% 68%; /* Sophisticated rose with vibrance */
+    --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Warm Lilac for accent elements */
-    --secondary: 332 22% 77%; /* Lilac #D8A7BF equivalent */
-    --secondary-foreground: 240 6% 34%;
+    /* Secondary - Rich Lavender for luxury feel */
+    --secondary: 280 35% 72%; /* Deeper lavender with sophistication */
+    --secondary-foreground: 0 0% 100%;
 
-    /* Success/Action - Trustworthy Green */
-    --success: 155 28% 60%; /* Green #6CA98B equivalent */
+    /* Success/Action - Trustworthy Emerald */
+    --success: 160 45% 55%; /* Rich emerald green */
     --success-foreground: 0 0% 100%;
 
-    /* Muted sections with warmth */
-    --muted: 46 33% 96%;
-    --muted-foreground: 240 6% 34%;
+    /* Muted sections with warmth and depth */
+    --muted: 43 25% 94%;
+    --muted-foreground: 240 8% 45%;
 
-    --accent: 332 22% 77%;
-    --accent-foreground: 240 6% 34%;
+    --accent: 335 45% 75%;
+    --accent-foreground: 240 15% 25%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 75% 58%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 332 22% 85%;
-    --input: 332 22% 90%;
-    --ring: 340 15% 75%;
+    --border: 335 25% 88%;
+    --input: 335 20% 92%;
+    --ring: 342 55% 68%;
 
-    --radius: 0.75rem;
+    --radius: 0.875rem;
 
-    /* Psychology-specific brand colors */
-    --brand-rose: 340 15% 75%;
-    --brand-lilac: 332 22% 77%;
-    --brand-green: 155 28% 60%;
-    --brand-cream: 46 33% 96%;
-    --brand-dark: 240 6% 34%;
+    /* Enhanced Psychology Brand Colors */
+    --brand-rose: 342 55% 68%; /* Vibrant rose */
+    --brand-rose-light: 342 65% 85%; /* Light variation */
+    --brand-rose-dark: 342 45% 55%; /* Dark variation */
+    
+    --brand-lavender: 280 35% 72%; /* Rich lavender */
+    --brand-lavender-light: 280 45% 85%; /* Light variation */
+    --brand-lavender-dark: 280 25% 58%; /* Dark variation */
+    
+    --brand-emerald: 160 45% 55%; /* Professional emerald */
+    --brand-emerald-light: 160 35% 68%; /* Light variation */
+    --brand-emerald-dark: 160 55% 42%; /* Dark variation */
+    
+    --brand-cream: 43 44% 97%; /* Warm cream */
+    --brand-warm-white: 40 50% 98%; /* Pure warm white */
+    --brand-charcoal: 240 15% 25%; /* Rich charcoal */
+    --brand-slate: 240 8% 45%; /* Medium slate */
 
-    /* Hero section specific */
-    --hero-title: 300 15% 35%; /* Deep warm purple #553F56 */
-    --hero-bg: 46 33% 96%;
+    /* Hero section - dramatic yet welcoming */
+    --hero-title: 285 25% 35%; /* Deep sophisticated purple */
+    --hero-bg: 43 44% 97%;
 
-    /* Professional gradients */
-    --gradient-warm: linear-gradient(135deg, hsl(var(--brand-rose)), hsl(var(--brand-lilac)));
-    --gradient-success: linear-gradient(135deg, hsl(var(--brand-green)), hsl(155 35% 45%));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--hero-bg)), hsl(var(--brand-cream)));
+    /* Rich Modern Gradients */
+    --gradient-warm: linear-gradient(135deg, hsl(var(--brand-rose)) 0%, hsl(var(--brand-lavender)) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(var(--brand-emerald)) 0%, hsl(160 55% 42%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(var(--hero-bg)) 0%, hsl(335 35% 96%) 100%);
+    --gradient-luxury: linear-gradient(135deg, hsl(var(--brand-lavender-light)) 0%, hsl(var(--brand-rose-light)) 100%);
+    --gradient-depth: linear-gradient(135deg, hsl(var(--brand-charcoal)) 0%, hsl(240 20% 15%) 100%);
 
-    /* Professional shadows */
-    --shadow-soft: 0 4px 20px hsl(var(--brand-rose) / 0.15);
-    --shadow-elevated: 0 8px 32px hsl(var(--brand-lilac) / 0.2);
-    --shadow-hero: 0 12px 48px hsl(var(--hero-title) / 0.1);
+    /* Sophisticated Shadows */
+    --shadow-soft: 0 4px 20px hsl(var(--brand-rose) / 0.25);
+    --shadow-elevated: 0 8px 32px hsl(var(--brand-lavender) / 0.3);
+    --shadow-hero: 0 12px 48px hsl(var(--hero-title) / 0.15);
+    --shadow-luxury: 0 20px 60px hsl(var(--brand-rose) / 0.2);
+    --shadow-glow: 0 0 40px hsl(var(--brand-lavender) / 0.3);
 
     /* Smooth professional transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -190,7 +205,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: hsl(var(--brand-lilac));
+    background: hsl(var(--brand-lavender));
     border-radius: 8px;
   }
 
@@ -200,7 +215,7 @@
 
   /* Focus styles for accessibility */
   *:focus-visible {
-    outline: 2px solid hsl(var(--brand-green));
+    outline: 2px solid hsl(var(--brand-emerald));
     outline-offset: 2px;
     border-radius: var(--radius);
   }
@@ -225,8 +240,52 @@
     background: var(--gradient-warm);
   }
 
-  .success-gradient {
+  /* Modern luxury gradient classes */
+  .luxury-gradient {
+    background: var(--gradient-luxury);
+  }
+
+  .depth-gradient {
+    background: var(--gradient-depth);
+  }
+
+  /* Enhanced Card Styles */
+  .card-luxury {
+    box-shadow: var(--shadow-luxury);
+    transition: var(--transition-smooth);
+    border: 1px solid hsl(var(--brand-rose) / 0.1);
+  }
+
+  .card-luxury:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Modern Button Variants */
+  .btn-luxury {
+    @apply btn-professional;
+    background: var(--gradient-warm);
+    color: white;
+    border-radius: 2rem;
+    font-weight: 600;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .btn-luxury:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-luxury);
+  }
+
+  .btn-emerald {
+    @apply btn-professional;
     background: var(--gradient-success);
+    color: white;
+    font-weight: 600;
+  }
+
+  .btn-emerald:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevated);
   }
 
   /* Professional Card Styles */

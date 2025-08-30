@@ -75,13 +75,14 @@ const Index = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Button 
-                  className="btn-primary"
+                  variant="emerald"
+                  size="lg"
                   onClick={() => setIsSchedulingOpen(true)}
                 >
                   <Calendar className="w-5 h-5 mr-2" />
                   Agendar Consulta
                 </Button>
-                <Button variant="outline" asChild>
+                <Button variant="outline" size="lg" asChild>
                   <Link to="/sobre">
                     Conheça meu trabalho
                     <ChevronRight className="w-4 h-4 ml-2" />
@@ -161,10 +162,10 @@ const Index = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <Card key={index} className="card-elevated group cursor-pointer">
+              <Card key={index} className="card-luxury group cursor-pointer border-0">
                 <CardContent className="p-6 text-center">
-                  <div className="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-success/20 transition-colors">
-                    <service.icon className="w-8 h-8 text-success" />
+                  <div className="w-16 h-16 bg-gradient-to-br from-brand-emerald-light to-brand-emerald rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-glow transition-all duration-300">
+                    <service.icon className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-card-title mb-3">{service.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
@@ -190,7 +191,7 @@ const Index = () => {
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="card-elevated">
+            <Card className="card-luxury border-0">
               <CardContent className="p-0">
                 <div className="mb-4">
                   <img
@@ -209,7 +210,7 @@ const Index = () => {
                   </p>
                   <Link 
                     to="/blog/como-escolher-um-psicologo"
-                    className="text-success hover:text-success/80 font-medium text-sm flex items-center"
+                    className="text-brand-emerald hover:text-brand-emerald-dark font-medium text-sm flex items-center transition-colors"
                   >
                     Ler artigo completo
                     <ChevronRight className="w-4 h-4 ml-1" />
@@ -217,7 +218,7 @@ const Index = () => {
                 </div>
               </CardContent>
             </Card>
-            <Card className="card-elevated">
+            <Card className="card-luxury border-0">
               <CardContent className="p-0">
                 <div className="mb-4">
                   <img
@@ -236,7 +237,7 @@ const Index = () => {
                   </p>
                   <Link 
                     to="/blog/tecnicas-ansiedade-trabalho"
-                    className="text-success hover:text-success/80 font-medium text-sm flex items-center"
+                    className="text-brand-emerald hover:text-brand-emerald-dark font-medium text-sm flex items-center transition-colors"
                   >
                     Ler artigo completo
                     <ChevronRight className="w-4 h-4 ml-1" />
@@ -244,7 +245,7 @@ const Index = () => {
                 </div>
               </CardContent>
             </Card>
-            <Card className="card-elevated">
+            <Card className="card-luxury border-0">
               <CardContent className="p-0">
                 <div className="mb-4">
                   <img
@@ -263,7 +264,7 @@ const Index = () => {
                   </p>
                   <Link 
                     to="/blog/tcc-relacionamentos"
-                    className="text-success hover:text-success/80 font-medium text-sm flex items-center"
+                    className="text-brand-emerald hover:text-brand-emerald-dark font-medium text-sm flex items-center transition-colors"
                   >
                     Ler artigo completo
                     <ChevronRight className="w-4 h-4 ml-1" />
@@ -294,7 +295,8 @@ const Index = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <Button 
-              className="bg-white text-brand-dark hover:bg-white/90"
+              variant="luxury"
+              size="lg"
               onClick={() => setIsSchedulingOpen(true)}
             >
               <Calendar className="w-5 h-5 mr-2" />
@@ -302,7 +304,8 @@ const Index = () => {
             </Button>
             <Button 
               variant="outline" 
-              className="border-white text-white hover:bg-white hover:text-brand-dark"
+              size="lg"
+              className="border-white text-white hover:bg-white hover:text-brand-charcoal"
               asChild
             >
               <a href="https://wa.me/5521987654321" target="_blank" rel="noopener noreferrer">

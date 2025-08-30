@@ -64,10 +64,18 @@ export default {
 				},
 				brand: {
 					rose: 'hsl(var(--brand-rose))',
-					lilac: 'hsl(var(--brand-lilac))',
-					green: 'hsl(var(--brand-green))',
+					'rose-light': 'hsl(var(--brand-rose-light))',
+					'rose-dark': 'hsl(var(--brand-rose-dark))',
+					lavender: 'hsl(var(--brand-lavender))',
+					'lavender-light': 'hsl(var(--brand-lavender-light))',
+					'lavender-dark': 'hsl(var(--brand-lavender-dark))',
+					emerald: 'hsl(var(--brand-emerald))',
+					'emerald-light': 'hsl(var(--brand-emerald-light))',
+					'emerald-dark': 'hsl(var(--brand-emerald-dark))',
 					cream: 'hsl(var(--brand-cream))',
-					dark: 'hsl(var(--brand-dark))'
+					'warm-white': 'hsl(var(--brand-warm-white))',
+					charcoal: 'hsl(var(--brand-charcoal))',
+					slate: 'hsl(var(--brand-slate))'
 				},
 				hero: {
 					title: 'hsl(var(--hero-title))',
