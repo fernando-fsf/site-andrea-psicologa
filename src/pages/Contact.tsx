@@ -96,7 +96,7 @@ const Contact = () => {
                   <p className="text-sm text-muted-foreground mb-4">
                     Fale comigo diretamente pelo WhatsApp
                   </p>
-                  <Button className="btn-primary w-full" asChild>
+                  <Button variant="luxury" className="w-full" asChild>
                     <a href="https://wa.me/5521987654321" target="_blank" rel="noopener noreferrer">
                       <MessageCircle className="w-4 h-4 mr-2" />
                       (21) 98765-4321
@@ -114,7 +114,7 @@ const Contact = () => {
                   <p className="text-sm text-muted-foreground mb-4">
                     Envie sua mensagem por email
                   </p>
-                  <Button variant="outline" className="w-full" asChild>
+                  <Button variant="luxury" className="w-full" asChild>
                     <a href="mailto:contato@andreamatiaspsi.com">
                       <Mail className="w-4 h-4 mr-2" />
                       Enviar Email
@@ -132,7 +132,7 @@ const Contact = () => {
                   <p className="text-sm text-muted-foreground mb-4">
                     Agende sua consulta online
                   </p>
-                  <Button variant="outline" className="w-full">
+                  <Button variant="luxury" className="w-full">
                     <Calendar className="w-4 h-4 mr-2" />
                     Agendar Consulta
                   </Button>
@@ -220,7 +220,8 @@ const Contact = () => {
                     
                     <Button 
                       type="submit" 
-                      className="btn-primary w-full" 
+                      variant="luxury"
+                      className="w-full" 
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? (
@@ -297,13 +298,13 @@ const Contact = () => {
                   </CardHeader>
                   <CardContent>
                     <div className="flex gap-4">
-                      <Button variant="outline" size="sm" asChild>
+                      <Button variant="luxury" size="sm" asChild>
                         <a href="https://www.instagram.com/andreamatiaspsi" target="_blank" rel="noopener noreferrer">
                           <Instagram className="w-4 h-4 mr-2" />
                           Instagram
                         </a>
                       </Button>
-                      <Button variant="outline" size="sm" asChild>
+                      <Button variant="luxury" size="sm" asChild>
                         <a href="https://www.facebook.com/andreamatiaspsi" target="_blank" rel="noopener noreferrer">
                           <Facebook className="w-4 h-4 mr-2" />
                           Facebook
