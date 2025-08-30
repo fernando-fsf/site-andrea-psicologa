@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://andreamatiaspsi.com/sitemap.xml
+
+# Disallow admin areas and sensitive files
+Disallow: /admin/
+Disallow: *.json$
+Disallow: /api/
+
+# Allow social media crawlers
+User-agent: facebookexternalhit/1.1
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
