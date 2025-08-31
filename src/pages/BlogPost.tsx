@@ -13,12 +13,14 @@ import {
   ChevronRight,
   Home
 } from 'lucide-react';
+import { useToast } from "@/hooks/use-toast"; // Importando o hook de toast
 import blogPsychologyImage from '@/assets/blog-psychology-consultation.jpg';
 import blogAnxietyImage from '@/assets/blog-workplace-anxiety.jpg';
 import blogRelationshipImage from '@/assets/blog-relationship-therapy.jpg';
 
 const BlogPost = () => {
   const { slug } = useParams();
+  const { toast } = useToast(); // Inicializando o hook de toast
 
   // Mock blog posts data
   const blogPosts = {
@@ -158,6 +160,44 @@ const BlogPost = () => {
     );
   }
 
+  // --- LÓGICA DE COMPARTILHAMENTO ---
+  const postUrl = `https://andreamatiaspsi.com/blog/${slug}`;
+  const postTitle = encodeURIComponent(currentPost.title);
+
+  const shareLinks = {
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}`,
+    twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(postUrl)}&text=${postTitle}`,
+    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`
+  };
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: currentPost.title,
+          text: currentPost.excerpt,
+          url: postUrl,
+        });
+      } catch (error) {
+        console.error("Erro ao usar a API de compartilhamento:", error);
+        // Fallback para copiar o link se o usuário cancelar o compartilhamento nativo
+        navigator.clipboard.writeText(postUrl);
+        toast({
+            title: "Link copiado!",
+            description: "O link foi copiado para sua área de transferência.",
+        });
+      }
+    } else {
+      // Fallback para computadores
+      navigator.clipboard.writeText(postUrl);
+      toast({
+        title: "Link copiado!",
+        description: "O link do artigo foi copiado para a sua área de transferência.",
+      });
+    }
+  };
+  // --- FIM DA LÓGICA DE COMPARTILHAMENTO ---
+
   const getAbsoluteImageUrl = (imagePath: string) => {
     const imageName = imagePath.split('/').pop()?.split('.')[0];
     const imageMap: { [key: string]: any } = {
@@ -291,16 +331,22 @@ const BlogPost = () => {
               <div className="flex items-center gap-4 mb-8">
                 <span className="text-sm font-medium">Compartilhar:</span>
                 <div className="flex gap-2">
-                  <Button size="sm" variant="outline" className="p-2">
-                    <Facebook className="w-4 h-4" />
+                  <Button size="sm" variant="outline" className="p-2" asChild>
+                    <a href={shareLinks.facebook} target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no Facebook">
+                      <Facebook className="w-4 h-4" />
+                    </a>
                   </Button>
-                  <Button size="sm" variant="outline" className="p-2">
-                    <Twitter className="w-4 h-4" />
+                  <Button size="sm" variant="outline" className="p-2" asChild>
+                    <a href={shareLinks.twitter} target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no Twitter">
+                      <Twitter className="w-4 h-4" />
+                    </a>
                   </Button>
-                  <Button size="sm" variant="outline" className="p-2">
-                    <Linkedin className="w-4 h-4" />
+                  <Button size="sm" variant="outline" className="p-2" asChild>
+                    <a href={shareLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no LinkedIn">
+                      <Linkedin className="w-4 h-4" />
+                    </a>
                   </Button>
-                  <Button size="sm" variant="outline" className="p-2">
+                  <Button size="sm" variant="outline" className="p-2" onClick={handleShare} aria-label="Compartilhar">
                     <Share2 className="w-4 h-4" />
                   </Button>
                 </div>
