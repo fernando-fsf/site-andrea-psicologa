@@ -114,9 +114,9 @@ const Contact = () => {
                     Fale comigo diretamente pelo WhatsApp
                   </p>
                   <Button variant="luxury" className="w-full" asChild>
-                    <a href="https://wa.me/5521987654321" target="_blank" rel="noopener noreferrer">
+                    <a href="https://wa.me/5521990190127" target="_blank" rel="noopener noreferrer">
                       <MessageCircle className="w-4 h-4 mr-2" />
-                      (21) 98765-4321
+                      (21) 99019-0127
                     </a>
                   </Button>
                 </CardContent>
@@ -281,7 +281,7 @@ const Contact = () => {
                       <div>
                         <h4 className="font-semibold">Telefone/WhatsApp</h4>
                         <p className="text-sm text-muted-foreground">
-                          (21) 98765-4321
+                          (21) 99019-0127
                         </p>
                       </div>
                     </div>
@@ -318,13 +318,13 @@ const Contact = () => {
                   <CardContent>
                     <div className="flex gap-4">
                       <Button variant="luxury" size="sm" asChild>
-                        <a href="https://www.instagram.com/andreamatiaspsi" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.instagram.com/andreamatias.psi?igsh=a3RjNjl5c3VyZzVo" target="_blank" rel="noopener noreferrer">
                           <Instagram className="w-4 h-4 mr-2" />
                           Instagram
                         </a>
                       </Button>
                       <Button variant="luxury" size="sm" asChild>
-                        <a href="https://www.facebook.com/andreamatiaspsi" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.facebook.com/share/1DXiKXSbvM/" target="_blank" rel="noopener noreferrer">
                           <Facebook className="w-4 h-4 mr-2" />
                           Facebook
                         </a>
