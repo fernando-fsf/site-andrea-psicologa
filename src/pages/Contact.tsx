@@ -5,11 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Clock, 
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
   Calendar,
   MessageCircle,
   Send,
@@ -33,23 +33,40 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Mensagem enviada com sucesso!",
-      description: "Retornarei seu contato em até 24 horas.",
-    });
+    try {
+      const response = await fetch("/api/send-email", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
-    });
-    
-    setIsSubmitting(false);
+      if (response.ok) {
+        toast({
+          title: "Mensagem enviada com sucesso!",
+          description: "Retornarei seu contato em até 24 horas.",
+        });
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        // Se a API retornar um erro, mostra uma mensagem de falha
+        throw new Error('Falha no envio do formulário');
+      }
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Ops! Algo deu errado.",
+        description: "Não foi possível enviar sua mensagem. Tente novamente mais tarde.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -77,7 +94,7 @@ const Contact = () => {
               Vamos conversar?
             </h1>
             <p className="text-body-large mb-8 max-w-3xl mx-auto">
-              Estou aqui para ajudar você em sua jornada de bem-estar mental. 
+              Estou aqui para ajudar você em sua jornada de bem-estar mental.
               Entre em contato para agendar sua consulta ou tirar suas dúvidas.
             </p>
           </div>
@@ -115,6 +132,7 @@ const Contact = () => {
                     Envie sua mensagem por email
                   </p>
                   <Button variant="luxury" className="w-full" asChild>
+                    {/* Caso queira mudar o e-mail de contato, altere aqui */}
                     <a href="mailto:contato@andreamatiaspsi.com">
                       <Mail className="w-4 h-4 mr-2" />
                       Enviar Email
@@ -178,7 +196,7 @@ const Contact = () => {
                         />
                       </div>
                     </div>
-                    
+
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="phone">Telefone/WhatsApp</Label>
@@ -204,7 +222,7 @@ const Contact = () => {
                         />
                       </div>
                     </div>
-                    
+
                     <div>
                       <Label htmlFor="message">Mensagem *</Label>
                       <Textarea
@@ -217,11 +235,11 @@ const Contact = () => {
                         rows={5}
                       />
                     </div>
-                    
-                    <Button 
-                      type="submit" 
+
+                    <Button
+                      type="submit"
                       variant="luxury"
-                      className="w-full" 
+                      className="w-full"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? (
@@ -252,12 +270,12 @@ const Contact = () => {
                       <div>
                         <h4 className="font-semibold">Localização</h4>
                         <p className="text-sm text-muted-foreground">
-                          Nova Iguaçu, Rio de Janeiro<br/>
+                          Nova Iguaçu, Rio de Janeiro<br />
                           Atendimento presencial e online
                         </p>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-start gap-3">
                       <Phone className="w-5 h-5 text-success mt-1" />
                       <div>
@@ -267,24 +285,25 @@ const Contact = () => {
                         </p>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-start gap-3">
                       <Mail className="w-5 h-5 text-success mt-1" />
                       <div>
                         <h4 className="font-semibold">Email</h4>
                         <p className="text-sm text-muted-foreground">
+                          {/* Caso queira mudar o e-mail de contato, altere aqui */}
                           contato@andreamatiaspsi.com
                         </p>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-start gap-3">
                       <Clock className="w-5 h-5 text-success mt-1" />
                       <div>
                         <h4 className="font-semibold">Horário de Atendimento</h4>
                         <p className="text-sm text-muted-foreground">
-                          Segunda a Sexta: 8h às 18h<br/>
-                          Sábado: 8h às 12h<br/>
+                          Segunda a Sexta: 8h às 18h<br />
+                          Sábado: 8h às 12h<br />
                           Domingo: Fechado
                         </p>
                       </div>
@@ -318,7 +337,7 @@ const Contact = () => {
                   <CardContent className="p-6">
                     <h4 className="font-semibold mb-3">Primeira consulta</h4>
                     <p className="text-sm text-muted-foreground">
-                      Na primeira consulta, conversaremos sobre suas necessidades e expectativas. 
+                      Na primeira consulta, conversaremos sobre suas necessidades e expectativas.
                       É um momento para você me conhecer e decidir se sou a profissional ideal para te acompanhar.
                     </p>
                   </CardContent>
@@ -339,37 +358,37 @@ const Contact = () => {
                 <CardContent className="p-6">
                   <h3 className="font-semibold mb-3">Como funciona a consulta online?</h3>
                   <p className="text-sm text-muted-foreground">
-                    As consultas online são realizadas via Google Meet em horário agendado. 
+                    As consultas online são realizadas via Google Meet em horário agendado.
                     Você precisa apenas de um dispositivo com câmera e internet estável.
                   </p>
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardContent className="p-6">
                   <h3 className="font-semibold mb-3">Qual a duração das sessões?</h3>
                   <p className="text-sm text-muted-foreground">
-                    Cada sessão tem duração de 50 minutos. A frequência é definida de acordo 
+                    Cada sessão tem duração de 50 minutos. A frequência é definida de acordo
                     com suas necessidades, geralmente semanal ou quinzenal.
                   </p>
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardContent className="p-6">
                   <h3 className="font-semibold mb-3">Aceita convênio médico?</h3>
                   <p className="text-sm text-muted-foreground">
-                    Atualmente não trabalho com convênios, mas posso fornecer o recibo 
+                    Atualmente não trabalho com convênios, mas posso fornecer o recibo
                     para reembolso junto ao seu plano de saúde.
                   </p>
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardContent className="p-6">
                   <h3 className="font-semibold mb-3">Como cancelar ou remarcar?</h3>
                   <p className="text-sm text-muted-foreground">
-                    Cancelamentos devem ser feitos com pelo menos 24h de antecedência. 
+                    Cancelamentos devem ser feitos com pelo menos 24h de antecedência.
                     Remarcações podem ser feitas via WhatsApp ou email.
                   </p>
                 </CardContent>
