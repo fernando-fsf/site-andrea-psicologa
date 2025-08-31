@@ -1,44 +1,47 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu, X, Calendar } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
-
-  const navigation = [
-    { name: 'Início', href: '/' },
-    { name: 'Sobre', href: '/sobre' },
-    { name: 'Serviços', href: '/#servicos' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Contato', href: '/contato' },
-  ];
+  const navigate = useNavigate(); // Hook para navegação programática
 
   const scrollToSection = (href: string) => {
-    if (href.startsWith('/#')) {
-      // If we're not on the home page, navigate to home first
-      if (location.pathname !== '/') {
-        // Use React Router for navigation instead of window.location
-        window.location.href = href;
-        return;
-      }
-      
-      const sectionId = href.substring(2);
-      const element = document.getElementById(sectionId);
-      if (element) {
-        // Get header height for proper offset
-        const headerHeight = 80;
-        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-        const offsetPosition = elementPosition - headerHeight;
-        
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    }
+    const sectionId = href.substring(2); // Remove '/#' para obter o ID da seção
+
+    // Fecha o menu móvel em qualquer clique
     setMobileMenuOpen(false);
+
+    // Função para rolar até a seção
+    const performScroll = (id: string) => {
+      // Usamos um pequeno timeout para garantir que a página renderizou antes de rolar
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          const headerHeight = 80; // Altura do header para calcular o deslocamento
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - headerHeight;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    };
+
+    // Verifica se já estamos na página inicial
+    if (location.pathname === '/') {
+      // Se sim, apenas rola para a seção
+      performScroll(sectionId);
+    } else {
+      // Se não, navega para a página inicial primeiro
+      navigate('/');
+      // E então executa a rolagem
+      performScroll(sectionId);
+    }
   };
 
   return (
@@ -77,9 +80,7 @@ const Header = () => {
           ))}
           <Button 
             className="btn-primary"
-            onClick={() => {
-              scrollToSection('/#contato');
-            }}
+            onClick={() => scrollToSection('/#contato')}
           >
             <Calendar className="w-4 h-4 mr-2" />
             Agendar
@@ -133,10 +134,7 @@ const Header = () => {
             ))}
             <Button 
               className="btn-primary w-full"
-              onClick={() => {
-                setMobileMenuOpen(false);
-                scrollToSection('/#contato');
-              }}
+              onClick={() => scrollToSection('/#contato')}
             >
               <Calendar className="w-4 h-4 mr-2" />
               Agendar Consulta
